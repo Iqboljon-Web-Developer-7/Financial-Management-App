@@ -5,7 +5,13 @@ import { motion } from "framer-motion";
 
 ChartJS.register(...registerables);
 
-const AnimatedChart = ({ incomeData, outcomeData, labels }) => {
+const AnimatedChart = ({
+  incomeData,
+  outcomeData,
+  labels,
+  currencyConverter,
+  selectedCurrency,
+}) => {
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -28,19 +34,27 @@ const AnimatedChart = ({ incomeData, outcomeData, labels }) => {
 
   useEffect(() => {
     if (labels.length && incomeData.length && outcomeData.length) {
+      // Convert incomeData and outcomeData to the selected main currency
+      const convertedIncomeData = incomeData.map((income) =>
+        currencyConverter(income, selectedCurrency)
+      );
+      const convertedOutcomeData = outcomeData.map((outcome) =>
+        currencyConverter(outcome, selectedCurrency)
+      );
+
       setChartData({
         labels: labels,
         datasets: [
           {
             label: "Income",
-            data: incomeData,
+            data: convertedIncomeData,
             fill: false,
             borderColor: "green",
             tension: 0.1,
           },
           {
             label: "Outcome",
-            data: outcomeData,
+            data: convertedOutcomeData,
             fill: false,
             borderColor: "red",
             tension: 0.1,
@@ -48,7 +62,7 @@ const AnimatedChart = ({ incomeData, outcomeData, labels }) => {
         ],
       });
     }
-  }, [incomeData, outcomeData, labels]);
+  }, [incomeData, outcomeData, labels, currencyConverter, selectedCurrency]);
 
   const chartOptions = {
     responsive: true,

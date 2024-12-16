@@ -104,6 +104,8 @@ const Home = () => {
               incomeData={incomeData}
               outcomeData={outcomeData}
               labels={months}
+              currencyConverter={currencyConverter}
+              selectedCurrency={selectedCurrency}
             />
           </Col>
 

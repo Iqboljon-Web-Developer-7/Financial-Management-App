@@ -5,7 +5,6 @@ import "./sidebar.scss";
 
 const navItems = [
   { to: "/", label: "Overview", icon: "bi-grid" },
-  { to: "/balances", label: "Balances", icon: "bi-wallet" },
   { to: "/transactions", label: "Transactions", icon: "bi-arrow-left-right" },
   {
     to: "/converter",

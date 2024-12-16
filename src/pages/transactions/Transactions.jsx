@@ -103,7 +103,7 @@ const TransactionsPage = () => {
           <Form.Group controlId="incomeInput">
             <Form.Control
               type="number"
-              placeholder="Enter income"
+              placeholder="Enter income usd"
               value={income}
               onChange={(e) => setIncome(e.target.value)}
             />
@@ -141,7 +141,7 @@ const TransactionsPage = () => {
           <Form.Group controlId="outcomeInput">
             <Form.Control
               type="number"
-              placeholder="Enter outcome"
+              placeholder="Enter outcome usd"
               value={outcome}
               onChange={(e) => setOutcome(e.target.value)}
             />
@@ -176,7 +176,7 @@ const TransactionsPage = () => {
         </Col>
       </Row>
 
-      <h4 className="mt-5">Add Category</h4>
+      <h5 className="mt-5 ">Add Category</h5>
       <Button
         variant="info"
         className="mb-4"
@@ -187,7 +187,7 @@ const TransactionsPage = () => {
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add New Category</Modal.Title>
+          <Modal.p>Add New Category</Modal.p>
         </Modal.Header>
         <Modal.Body>
           <Form.Control
