@@ -9,6 +9,7 @@ export const initialState = JSON.parse(
   cards: [],
   transactions: [],
   categories: ["Food", "Transport", "Shopping"],
+  conversionRates: {},
 };
 
 export const reducer = (state, action) => {
@@ -46,6 +47,11 @@ export const reducer = (state, action) => {
           ...state.balance,
           currency: action.currency,
         },
+      };
+    case "SET_CONVERSION_RATES":
+      return {
+        ...state,
+        conversionRates: action.conversionRates,
       };
     default:
       return state;
