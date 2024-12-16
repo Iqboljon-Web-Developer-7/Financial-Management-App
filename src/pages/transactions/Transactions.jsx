@@ -27,6 +27,7 @@ const TransactionsPage = () => {
       theme: "dark",
       transition: Slide,
     });
+
   const successMsg = () =>
     toast.success("Transaction created!", {
       position: "bottom-right",
@@ -77,11 +78,74 @@ const TransactionsPage = () => {
       });
       setOutcome("");
       setCategory("");
+      setDescription("");
       successMsg();
     } else {
       errorMsg("Fill all inputs please!");
     }
   };
+
+  // const handleAddIncome = (e) => {
+  //   e.preventDefault();
+  //   if (income && category && description) {
+  //     const newBalance = state.balance.value + parseFloat(income); // Increase balance by income value
+  //     dispatch({
+  //       type: "ADD_TRANSACTION",
+  //       item: {
+  //         type: "income",
+  //         value: parseFloat(income),
+  //         date: new Date().toISOString(),
+  //         category,
+  //         description,
+  //       },
+  //     });
+  //     dispatch({
+  //       type: "SET_MAIN_CURRENCY",
+  //       currency: state.mainCurrency, // Ensure the current currency remains unchanged
+  //       balance: {
+  //         ...state.balance,
+  //         value: newBalance, // Update the balance
+  //       },
+  //     });
+  //     setIncome("");
+  //     setCategory("");
+  //     setDescription("");
+  //     successMsg();
+  //   } else {
+  //     errorMsg("Fill all inputs please!");
+  //   }
+  // };
+
+  // const handleAddOutcome = (e) => {
+  //   e.preventDefault();
+  //   if (outcome && category && description) {
+  //     const newBalance = state.balance.value - parseFloat(outcome); // Decrease balance by outcome value
+  //     dispatch({
+  //       type: "ADD_TRANSACTION",
+  //       item: {
+  //         type: "outcome",
+  //         value: parseFloat(outcome),
+  //         date: new Date().toISOString(),
+  //         category,
+  //         description,
+  //       },
+  //     });
+  //     dispatch({
+  //       type: "SET_MAIN_CURRENCY",
+  //       currency: state.mainCurrency, // Ensure the current currency remains unchanged
+  //       balance: {
+  //         ...state.balance,
+  //         value: newBalance, // Update the balance
+  //       },
+  //     });
+  //     setOutcome("");
+  //     setCategory("");
+  //     setDescription("");
+  //     successMsg();
+  //   } else {
+  //     errorMsg("Fill all inputs please!");
+  //   }
+  // };
 
   const handleAddCategory = () => {
     if (newCategory && !categories.includes(newCategory)) {

@@ -7,6 +7,8 @@ export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    console.log(state);
+
     localStorage.setItem("fincantionStatus", JSON.stringify(state));
   }, [state]);
 

@@ -94,7 +94,7 @@ const TransactionsHistory = () => {
       </Container>
 
       <ListGroup>
-        {filteredTransactions.map((transaction, index) => (
+        {filteredTransactions?.map((transaction, index) => (
           <ListGroup.Item
             key={index}
             className="d-flex justify-content-between align-items-center shadow-sm mb-2 p-3"
@@ -110,9 +110,7 @@ const TransactionsHistory = () => {
             )}
             ${transaction.value.toFixed(2)}
             <div className="text-muted">
-              <em>
-                {new Date(transaction.date).toLocaleString().slice(0, 10)}
-              </em>
+              <em>{new Date(transaction.date).toLocaleString()}</em>
             </div>
             <div className="text-success">{transaction.category}</div>
           </ListGroup.Item>
