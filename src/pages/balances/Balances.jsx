@@ -40,7 +40,7 @@ const Balances = () => {
   };
 
   return (
-    <Container fluid className="py-5">
+    <Container fluid className="py-5 bg-dark text-light">
       <h4 className="my-4 text-center">Add Card Information</h4>
 
       <Row className="justify-content-center">

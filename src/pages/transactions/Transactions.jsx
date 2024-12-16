@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { useStateValue } from "@/context/index";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  ListGroup,
-  Modal,
-} from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 
 import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +12,7 @@ const TransactionsPage = () => {
   const [category, setCategory] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [newCategory, setNewCategory] = useState("");
+  const [description, setDescription] = useState("");
   const categories = state.categories;
 
   const oldCategory = () =>
@@ -37,7 +30,7 @@ const TransactionsPage = () => {
 
   const handleAddIncome = (e) => {
     e.preventDefault();
-    if (income && category) {
+    if (income && category && description) {
       dispatch({
         type: "ADD_TRANSACTION",
         item: {
@@ -45,16 +38,18 @@ const TransactionsPage = () => {
           value: parseFloat(income),
           date: new Date().toISOString(),
           category,
+          description,
         },
       });
       setIncome("");
       setCategory("");
+      setDescription("");
     }
   };
 
   const handleAddOutcome = (e) => {
     e.preventDefault();
-    if (outcome && category) {
+    if (outcome && category && description) {
       dispatch({
         type: "ADD_TRANSACTION",
         item: {
@@ -62,6 +57,7 @@ const TransactionsPage = () => {
           value: parseFloat(outcome),
           date: new Date().toISOString(),
           category,
+          description,
         },
       });
       setOutcome("");
@@ -80,7 +76,7 @@ const TransactionsPage = () => {
   };
 
   return (
-    <Container className="mt-4">
+    <Container className="pt-4 bg-dark text-light">
       <h3 className="mb-4 text-center">Transactions</h3>
       <Row className="mb-3">
         <Col md={6}>
@@ -103,6 +99,13 @@ const TransactionsPage = () => {
                 </option>
               ))}
             </Form.Select>
+            <Form.Control
+              className="mt-2"
+              type="text"
+              placeholder="Enter Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
             <Button
               type="submit"
               variant="success"
@@ -134,6 +137,13 @@ const TransactionsPage = () => {
                 </option>
               ))}
             </Form.Select>
+            <Form.Control
+              className="mt-2"
+              type="text"
+              placeholder="Enter Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
             <Button
               type="submit"
               variant="danger"
@@ -146,6 +156,7 @@ const TransactionsPage = () => {
         </Col>
       </Row>
 
+      <h4 className="mt-5">Add Category</h4>
       <Button
         variant="info"
         className="mb-4"
@@ -175,20 +186,6 @@ const TransactionsPage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <div>
-        <h3>Transaction History</h3>
-        <ListGroup>
-          {state.transactions.map((transaction, index) => (
-            <ListGroup.Item key={index}>
-              <strong>{transaction.type.toUpperCase()}:</strong> $
-              {transaction.value.toFixed(2)}{" "}
-              <em>({new Date(transaction.date).toLocaleString()})</em>{" "}
-              <strong>Category:</strong> {transaction.category}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </div>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
-import { useStateValue } from "@/context";
 import React, { memo } from "react";
+import { useStateValue } from "@/context";
 
 import { TbHeartPlus } from "react-icons/tb";
 import { BsCartPlus } from "react-icons/bs";

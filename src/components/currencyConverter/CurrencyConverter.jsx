@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useFetch } from "@/hooks/useFetch";
 import "./converter.scss";
 
 const CurrencyConverter = () => {
@@ -10,23 +10,17 @@ const CurrencyConverter = () => {
   const [convertedAmount, setConvertedAmount] = useState(null);
   const [error, setError] = useState("");
 
-  const API_KEY = import.meta.env.VITE_CURRENCY_API_KEY;
-  const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${fromCurrency}`;
-
+  const { data } = useFetch("USD", {}, [fromCurrency, toCurrency, amount]);
   useEffect(() => {
-    axios
-      .get(API_URL)
-      .then((response) => {
-        const rates = response.data.conversion_rates;
-        setCurrencies(Object.keys(rates));
-        setConvertedAmount((amount * rates[toCurrency]).toFixed(2));
-        setError("");
-      })
-      .catch((error) => {
-        setError("Failed to fetch currency data. Please try again later.");
-        console.error(error);
-      });
-  }, [fromCurrency, toCurrency, amount]);
+    if (data) {
+      const rates = data?.conversion_rates;
+      setCurrencies(Object.keys(rates));
+      setConvertedAmount((amount * rates[toCurrency]).toFixed(2));
+      setError("");
+    } else {
+      setError("Failed to fetch currency data. Please try again later.");
+    }
+  }, [data]);
 
   return (
     <div className="container text-center">
