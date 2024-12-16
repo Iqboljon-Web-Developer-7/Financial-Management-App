@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useStateValue } from "@/context";
 import { ListGroup, Form, Row, Col, Card, Container } from "react-bootstrap";
+import useCurrencyConverter from "@/util/currencyConverter"; // Import currency converter
 
 const TransactionsHistory = () => {
   const { state } = useStateValue();
+  const { currencyConverter } = useCurrencyConverter(); // Destructure currencyConverter
   const [filters, setFilters] = useState({
     category: "",
     dateRange: "all",
@@ -99,7 +101,7 @@ const TransactionsHistory = () => {
             key={index}
             className="d-flex justify-content-between align-items-center shadow-sm mb-2 p-3"
           >
-            {transaction.type.toUpperCase() == "INCOME" ? (
+            {transaction.type.toUpperCase() === "INCOME" ? (
               <div className="bg-success p-1 rounded-3 text-white">
                 <i className="bs bi-arrow-down fs-6"></i>
               </div>
@@ -108,7 +110,8 @@ const TransactionsHistory = () => {
                 <i className="bs bi-arrow-up fs-6"></i>
               </div>
             )}
-            ${transaction.value.toFixed(2)}
+            {currencyConverter(transaction.value, state.mainCurrency)}
+            {state.mainCurrency}
             <div className="text-muted">
               <em>{new Date(transaction.date).toLocaleString()}</em>
             </div>
