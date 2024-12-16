@@ -15,8 +15,20 @@ const TransactionsPage = () => {
   const [description, setDescription] = useState("");
   const categories = state.categories;
 
-  const oldCategory = () =>
-    toast.error("This category exists", {
+  const errorMsg = (msg) =>
+    toast.error(msg, {
+      position: "bottom-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
+  const successMsg = () =>
+    toast.success("Transaction created!", {
       position: "bottom-right",
       autoClose: 4000,
       hideProgressBar: false,
@@ -44,6 +56,9 @@ const TransactionsPage = () => {
       setIncome("");
       setCategory("");
       setDescription("");
+      successMsg();
+    } else {
+      errorMsg("Fill all inputs please!");
     }
   };
 
@@ -62,6 +77,9 @@ const TransactionsPage = () => {
       });
       setOutcome("");
       setCategory("");
+      successMsg();
+    } else {
+      errorMsg("Fill all inputs please!");
     }
   };
 
@@ -71,7 +89,7 @@ const TransactionsPage = () => {
       setNewCategory("");
       setShowModal(false);
     } else {
-      oldCategory();
+      errorMsg("This category exists");
     }
   };
 

@@ -1,6 +1,6 @@
 import TransactionsHistory from "@/components/transactionsHistory/TransactionsHistory";
 import React, { useState, useEffect } from "react";
-import { Col, Row, Form } from "react-bootstrap";
+import { Col, Row, Form, Container } from "react-bootstrap";
 import { useFetch } from "@/hooks/useFetch";
 import { useStateValue } from "@/context/index";
 
@@ -34,28 +34,33 @@ const Home = () => {
           <TransactionsHistory selectedCurrency={selectedCurrency} />
         </Col>
         <Col className="p-3">
-          <h3 className="mb-4 fs-3 text-light">Currency Selector</h3>
-          {error && <p className="text-danger">{error}</p>}
-          <Form>
-            <Form.Group controlId="currencySelect">
-              <Form.Label className="text-light">Select Currency</Form.Label>
-              <Form.Control
-                as="select"
-                value={selectedCurrency}
-                onChange={handleCurrencyChange}
-              >
-                {currencies.length > 0 ? (
-                  currencies.map((currency) => (
-                    <option key={currency} value={currency}>
-                      {currency}
-                    </option>
-                  ))
-                ) : (
-                  <option>Loading...</option>
-                )}
-              </Form.Control>
-            </Form.Group>
-          </Form>
+          <h3 className="mb-4 fs-3 text-light">
+            Balance: {state?.balance?.value}
+          </h3>
+          <Container>
+            <h3 className="mb-4 fs-3 text-light">Currency Selector</h3>
+            {error && <p className="text-danger">{error}</p>}
+            <Form>
+              <Form.Group controlId="currencySelect">
+                <Form.Label className="text-light">Select Currency</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={selectedCurrency}
+                  onChange={handleCurrencyChange}
+                >
+                  {currencies.length > 0 ? (
+                    currencies.map((currency) => (
+                      <option key={currency} value={currency}>
+                        {currency}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Loading...</option>
+                  )}
+                </Form.Control>
+              </Form.Group>
+            </Form>
+          </Container>
         </Col>
       </Row>
     </section>
