@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useStateValue } from "@/context";
 import { ListGroup, Form, Row, Col, Card, Container } from "react-bootstrap";
-import useCurrencyConverter from "@/util/currencyConverter"; // Import currency converter
+import useCurrencyConverter from "@/util/currencyConverter";
 
 const TransactionsHistory = () => {
   const { state } = useStateValue();
-  const { currencyConverter } = useCurrencyConverter(); // Destructure currencyConverter
+  const { currencyConverter } = useCurrencyConverter();
   const [filters, setFilters] = useState({
     category: "",
     dateRange: "all",

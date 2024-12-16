@@ -35,14 +35,12 @@ const Home = () => {
     }
   }, [data]);
 
-  // Handle currency selection change
   const handleCurrencyChange = (event) => {
     const newCurrency = event.target.value;
     setSelectedCurrency(newCurrency);
     dispatch({ type: "SET_MAIN_CURRENCY", currency: newCurrency });
   };
 
-  // Filter transactions based on the selected filter (weekly, monthly, yearly)
   const filterTransactions = (transactions) => {
     if (filter === "all") return transactions;
 
@@ -77,14 +75,12 @@ const Home = () => {
     return acc;
   }, {});
 
-  // Sorting the months
   const months = Object.keys(groupedData).sort(
     (a, b) => new Date(`${a} 1, 2024`) - new Date(`${b} 1, 2024`)
   );
   const incomeData = months.map((month) => groupedData[month].income);
   const outcomeData = months.map((month) => groupedData[month].outcome);
 
-  // Convert balance and income/outcome amounts to the selected currency
   const balanceInMainCurrency = currencyConverter(
     state?.balance?.value,
     selectedCurrency

@@ -3,7 +3,6 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
 import { motion } from "framer-motion";
 
-// Register chart.js components
 ChartJS.register(...registerables);
 
 const AnimatedChart = ({ incomeData, outcomeData, labels }) => {

@@ -35,7 +35,7 @@ export const reducer = (state, action) => {
         ...state,
         balance: {
           ...state.balance,
-          value: newBalance, // Update the balance
+          value: newBalance,
         },
         transactions: [...state.transactions, action.item],
       };
