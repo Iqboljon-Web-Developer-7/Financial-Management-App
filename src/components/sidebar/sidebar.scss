@@ -1,6 +1,6 @@
 .sidebar {
   height: 100vh;
-  width: 280px;
+  width: 18rem;
   flex-shrink: 0;
   background-color: #121212;
   color: white;
@@ -25,8 +25,8 @@
 
 .nav-item.active,
 .nav-item:hover {
-  background-color: #3ea59e;
   color: white !important;
+  background-color: #3ea59e;
 }
 
 i {

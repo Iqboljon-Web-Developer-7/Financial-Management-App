@@ -5,6 +5,8 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import NotFound from "@/components/notFound";
 import Balances from "./balances/Balances";
 import Converter from "./converter/Converter";
+import Transactions from "./transactions/Transactions";
+import { ToastContainer } from "react-toastify";
 
 const Pages = () => {
   return (
@@ -14,9 +16,10 @@ const Pages = () => {
         <Route path="/" element={<Home />} />
         <Route path="/balances" element={<Balances />} />
         <Route path="/converter" element={<Converter />} />
-
+        <Route path="/transactions" element={<Transactions />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
+      <ToastContainer />
     </main>
   );
 };

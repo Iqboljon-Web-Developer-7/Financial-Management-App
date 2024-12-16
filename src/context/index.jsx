@@ -1,23 +1,9 @@
 import React, { useContext, createContext, useReducer, useEffect } from "react";
+import { initialState, reducer } from "./reducer";
 
 const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
-  const initialState = {
-    cards: JSON.parse(localStorage.getItem("cards")) || [],
-  };
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "ADD_CARD":
-        return {
-          cards: [...state.cards, action.item],
-        };
-      default:
-        return state;
-    }
-  };
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {

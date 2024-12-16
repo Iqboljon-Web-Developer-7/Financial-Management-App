@@ -10,7 +10,7 @@ const CurrencyConverter = () => {
   const [convertedAmount, setConvertedAmount] = useState(null);
   const [error, setError] = useState("");
 
-  const API_KEY = import.meta.env.VITE_CURRENCY_API_KEY; // Replace with your API key
+  const API_KEY = import.meta.env.VITE_CURRENCY_API_KEY;
   const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${fromCurrency}`;
 
   useEffect(() => {
@@ -28,27 +28,9 @@ const CurrencyConverter = () => {
       });
   }, [fromCurrency, toCurrency, amount]);
 
-  const handleConvert = () => {
-    axios
-      .get(API_URL)
-      .then((response) => {
-        const rate = response.data.conversion_rates[toCurrency];
-        setConvertedAmount((amount * rate).toFixed(2));
-        setError("");
-      })
-      .catch((error) => {
-        setError("Conversion failed. Please check your input.");
-        console.error(error);
-      });
-  };
-
   return (
-    <div className="container">
-      <h2 className="header">Currency Converter</h2>
-      <p className="subHeader">
-        Check live rates, set rate alerts, receive notifications, and more.
-      </p>
-      <div className="card">
+    <div className="container text-center">
+      <div className="card mt-3" id="card">
         <div className="section">
           <label className="label">Amount</label>
           <input
@@ -86,11 +68,9 @@ const CurrencyConverter = () => {
             ))}
           </select>
         </div>
-        <button className="button" onClick={handleConvert}>
-          Convert
-        </button>
+
         {convertedAmount && (
-          <p className="result">
+          <p className="result text-primary">
             {amount} {fromCurrency} = {convertedAmount} {toCurrency}
           </p>
         )}

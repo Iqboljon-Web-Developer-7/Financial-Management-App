@@ -1,23 +1,31 @@
-export const initialState = {
-  wishlist: [],
-  cart: [],
-  token: null,
+export const initialState = JSON.parse(
+  localStorage.getItem("fincantionStatus")
+) || {
+  cards: [],
+  transactions: [],
+  categories: ["Food", "Transport", "Shopping"],
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case "ADD_WISH_ITEM":
-      if (state.wishlist.findIndex((x) => x.id == action.product.id) < 0) {
-        return { ...state, wishlist: [...state.wishlist, action.product] };
-      }
+    case "ADD_CARD":
       return {
         ...state,
-        wishlist: state.wishlist.filter(
-          (item) => item.id !== action.product.id
-        ),
+        cards: [...state.cards, action.item],
       };
+    case "ADD_CATEGORY":
+      console.log(action.item);
 
+      return {
+        ...state,
+        categories: [...state.categories, action.item],
+      };
+    case "ADD_TRANSACTION": // Handle new transaction
+      return {
+        ...state,
+        transactions: [...state.transactions, action.item],
+      };
     default:
-      break;
+      return state;
   }
 };
