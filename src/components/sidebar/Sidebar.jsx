@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import "./Sidebar.scss";
+import "./sidebar.scss";
 
 const navItems = [
   { to: "/", label: "Overview", icon: "bi-grid" },
